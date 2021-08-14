@@ -76,46 +76,45 @@
             transactionArea.style.display = 'block';
         });
 
+        function spanTextUpdate(idName, balance){
+            const idText = document.getElementById(idName).innerText;
+            const idTextNumber = parseFloat(idText);
+            const total = idTextNumber + balance;
+
+            document.getElementById(idName).innerText = total;
+
+        }
+
+        function parseText(id){
+            const stringAmount = document.getElementById(id).value;
+            const numberAmount = parseFloat(stringAmount);
+
+            return numberAmount;
+        }
+
         /*deposit button event handler*/
+
         const addDeposit = document.getElementById('addDeposit');
         addDeposit.addEventListener('click', function (){
-            const depositAmount = document.getElementById('depositAmount').value;
-            const depositNumber = parseFloat(depositAmount);
+            const depositNumber = parseText('depositAmount');
 
-            const currentDeposit = document.getElementById('currentDeposit').innerText;
-            const currentDepositNumber = parseFloat(currentDeposit);
-            const totalDeposit = currentDepositNumber + depositNumber;
+            spanTextUpdate("currentDeposit", depositNumber);
+            spanTextUpdate("currentBalance", depositNumber);
 
-            document.getElementById('currentDeposit').innerText = totalDeposit;
             document.getElementById('depositAmount').value = "";
-
-
-            const currentBalance = document.getElementById('currentBalance').innerText;
-            const currentBalanceNumber = parseFloat(currentBalance);
-            const totalBalance = currentBalanceNumber + depositNumber;
-
-            document.getElementById('currentBalance').innerText = totalBalance;
         })
 
         /*withdraw button event handler*/
+
         const addWithdraw = document.getElementById('addWithdraw');
         addWithdraw.addEventListener('click', function (){
-            const withdrawAmount = document.getElementById('withdrawAmount').value;
-            const withdrawAmountNumber = parseFloat(withdrawAmount);
+            const withdrawAmountNumber = parseText('withdrawAmount');
 
-            const currentWithdraw = document.getElementById('currentWithdraw').innerText;
-            const currentWithdrawNumber = parseFloat(currentWithdraw);
-            const totalWithdraw = currentWithdrawNumber + withdrawAmountNumber;
+            spanTextUpdate('currentWithdraw',withdrawAmountNumber);
+            spanTextUpdate('currentBalance', -1 * withdrawAmountNumber);
 
-            document.getElementById('currentWithdraw').innerText = totalWithdraw;
             document.getElementById('withdrawAmount').value = "";
 
-
-            const currentBalance = document.getElementById('currentBalance').innerText;
-            const currentBalanceNumber = parseFloat(currentBalance);
-            const totalBalance = currentBalanceNumber - totalWithdraw;
-
-            document.getElementById('currentBalance').innerText = totalBalance;
         })
     </script>
 </body>
